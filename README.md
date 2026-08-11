@@ -1,5 +1,5 @@
 # Database_pt
-# *`EN`* Python CLI for PostgreSQL DB using prettytable. 
+# *`EN`* Python CLI for PostgreSQL DB that uses the prettytable library. 
 
 # *`RU`* Инерфейс командной стрки на Python для базы данных PostgreSQL. Использует библиотеку prettytable.
 
