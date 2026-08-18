@@ -4,4 +4,4 @@
 
 ## **`RU`** Инерфейс командной стрки на Python для базы данных PostgreSQL. Использует библиотеку prettytable.
 
-![](https://github.com/StantonDowd/Database_pt/blob/main/example.png)
+![PrettyTable](https://github.com/StantonDowd/Database_pt/blob/main/example.png)
