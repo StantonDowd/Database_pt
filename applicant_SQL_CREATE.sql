@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS applicant;
+CREATE SCHEMA applicant;
+USE applicant;
+
 CREATE TABLE department (
     department_id SERIAL PRIMARY KEY,
     name_department VARCHAR(30)
@@ -13,7 +17,9 @@ CREATE TABLE programs (
     name_program VARCHAR(50),
     department_id INT,
     plan INT,
-    FOREIGN KEY (department_id) REFERENCES department(department_id) ON DELETE CASCADE
+    FOREIGN KEY (department_id) REFERENCES department(department_id) 
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT
 );
 
 CREATE TABLE enrollee (
@@ -31,8 +37,12 @@ CREATE TABLE enrollee_achievement (
     enrollee_achievement_id SERIAL PRIMARY KEY,
     enrollee_id INT,
     achievement_id INT,
-    FOREIGN KEY (enrollee_id) REFERENCES enrollee(enrollee_id) ON DELETE CASCADE,
-    FOREIGN KEY (achievement_id) REFERENCES achievement(achievement_id) ON DELETE CASCADE
+    FOREIGN KEY (enrollee_id) REFERENCES enrollee(enrollee_id) 
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT,
+    FOREIGN KEY (achievement_id) REFERENCES achievement(achievement_id) 
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT
 );
 
 CREATE TABLE programs_subject (
@@ -40,16 +50,24 @@ CREATE TABLE programs_subject (
     program_id INT,
     subject_id INT,
     min_score INT,
-    FOREIGN KEY (program_id) REFERENCES program(program_id) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subject(subject_id) ON DELETE CASCADE
+    FOREIGN KEY (program_id) REFERENCES program(program_id) 
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT,
+    FOREIGN KEY (subject_id) REFERENCES subject(subject_id) 
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT
 );
 
 CREATE TABLE programs_enrollee (
     program_enrollee_id SERIAL PRIMARY KEY,
     program_id INT,
     enrollee_id INT,
-    FOREIGN KEY (program_id) REFERENCES program(program_id) ON DELETE CASCADE,
-    FOREIGN KEY (enrollee_id) REFERENCES enrollee(enrollee_id) ON DELETE CASCADE
+    FOREIGN KEY (program_id) REFERENCES program(program_id) 
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT,
+    FOREIGN KEY (enrollee_id) REFERENCES enrollee(enrollee_id) 
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT
 );
 
 CREATE TABLE enrollee_subject (
@@ -57,7 +75,11 @@ CREATE TABLE enrollee_subject (
     enrollee_id INT,
     subject_id INT,
     score INT,
-    FOREIGN KEY (enrollee_id) REFERENCES enrollee(enrollee_id) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subject(subject_id) ON DELETE CASCADE
+    FOREIGN KEY (enrollee_id) REFERENCES enrollee(enrollee_id) 
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT,
+    FOREIGN KEY (subject_id) REFERENCES subject(subject_id) 
+    ON UPDATE CASCADE
+	ON DELETE RESTRICT
 );
 
