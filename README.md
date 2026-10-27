@@ -1,5 +1,5 @@
 # ***Database_pt***
-![PrettyTable]([https://github.com/StantonDowd/Database_pt/blob/main/example.png](https://github.com/StantonDowd/Database_pt/blob/main/applicant-schema.png))
+![Schema](https://github.com/StantonDowd/Database_pt/blob/main/applicant-schema.png)
 ## **`EN`** Python CLI for PostgreSQL DB that uses the prettytable library. 
 
 ## **`RU`** Интерфейс командной стрки на Python для базы данных PostgreSQL. Использует библиотеку prettytable.
