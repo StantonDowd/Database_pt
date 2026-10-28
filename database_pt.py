@@ -3,7 +3,7 @@ import psycopg as pg
 from prettytable import PrettyTable as PT
 
 # Парсинг введённой пользователем строки/строк для передачи в виде SQL-запроса
-def queryfix():
+def queryfix() -> str:
 	lines = []
 	while(1):
 		line = input()
@@ -19,15 +19,14 @@ def queryfix():
 	else:
 		line = ' '.join(lines)
 		query = line.replace('\t', '')
-	return(query)
+	return query
 
-# Выводим в удобочитаемом виде
-def pt_print(cur):
+# Преобразуем в удобочитаемый вид
+def readable_table(cur) -> list:
 	columns = [desc[0] for desc in cur.description]
 	table = PT(columns)
 	table.add_rows(cur.fetchall())
-	print(table)
-	print()
+	return table
 
 # БД для подключения
 # Здесь вводится назвыание своей БД, юзернейм и пароль
@@ -45,23 +44,21 @@ if __name__ == '__main__':
 	with pg.connect(connStr) as conn:
 		with conn.cursor() as cur:
 			cur.execute(dt)
-			pt_print(cur)
+			print(readable_table(cur), "\n")
 			while(1):
-				print("Введите единичный(!) SQL-запрос для выполнения (; для окончания ввода запроса), \n\\dt для вывода всех таблиц или \\ex для выхода: ")
+				print("Ввведите единичный(!) SQL-запрос для выполнения (; для окончания ввода запроса), \n\\dt для вывода всех таблиц или \\ex для выхода: ")
 				query = queryfix()
 				try:
-					# print("Ввведите единичный(!) SQL-запрос для выполнения (; для окончания ввода запроса), \n\\dt для вывода всех таблиц или \\ex для выхода: ")
-					# query = queryfix()
 					if (query == '\\ex'):
 						break
 					elif (query == '\\dt'):
 						cur.execute(dt)
-						pt_print(cur)
+						print(readable_table(cur), "\n")
 						continue
 					cur.execute(query)
 					if query.startswith("SELECT"):
 						print("Результат запроса: \n")
-						pt_print(cur)
+						print(readable_table(cur), "\n")
 					else:
 						print("Запрос к БД выполнен успешно.\n")
 					conn.commit()
